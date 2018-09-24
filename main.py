@@ -35,8 +35,8 @@ form = """
         Rotate by:<input type = "text"  name = "rot" value = "0" />
       </label>                
       <label>
-        <textarea name  = "text">{0}</textarea>
-        <input type = "submit" name= "Submit Query" />
+        <textarea name = "text">{0}</textarea>
+        <input type = "submit" name = "Submit Query" />
       </label>
     </form>
   </body>
