@@ -1,27 +1,52 @@
-from flask import Flask, render_template, request
+from flask import Flask, request
 
-app = Flask(__name__)
+from caesar import rotate_stringapp = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/home')
-def home():
-    if request.method == 'GET':
-        return render_template('index.html')
-    elif request.method == 'POST':
-        return render_template('about.html')
+app.config['DEBUG'] = Trueform = """
 
-#instead of returning to about.html, could return to a second index.html that
-#will display it under the thing that looks the exact same as this page, instead
-#of a the about page
+<!DOCTYPE html>
 
-@app.route('/home/about', methods=['POST'])
-def about():
-    rot_amount = request.form.get("rotation-amount")
-    new_text = request.form.get("block-text")
-    ## TODO:
-    # run caesar algorithm
-    # receive a list/string/whatever you want with the answer
-    return render_template('about.html', rot = rot_amount, b_text = new_text)
+<html>
+  <head>
+    <style>
+      form {{
+        background-color: #eee;
+        padding: 20px;
+        margin: 0 auto;
+        width: 540px;
+        font: 16px sans-serif;
+        border-radius: 10px;
+      }}
 
-app.run(debug = True)
+      textarea {{
+        margin: 10px 0;
+        width: 540px;
+        height: 120px;
+      }}
+    </style>
+  </head>
+  <body>
+    <form method="POST"/>
+      <label> 
+        Rotate by:<input type = "text"  name = "rot" value = "0" />
+      </label>                
+      <label>
+        <textarea name  = "text">{0}</textarea>
+        <input type = "submit" name= "Submit Query" />
+      </label>
+    </form>
+  </body>
+</html>
+"""
+@app.route("/")
 
+def index():
+    return form.format("")@app.route("/", methods=["POST"])
+
+def encrypt():
+    rot = (int(request.form["rot"]))
+    text = request.form["text"]
+    encrypted_string = rotate_string(text, rot)    
+    return form.format(encrypted_string)
+
+app.run()
